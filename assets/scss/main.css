@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --primaryColor: #ad91cf;
+  --secondaryColor: rgb(196, 169, 230);
+  --blackColor: rgb(46, 46, 71);
+  --inputColor: rgb(241, 241, 241);
+  --successColor: rgb(205, 237, 207);
+  --failureColor: rgb(255, 0, 0);
+  --body-color: #E4E9F7;
+  --sidebar-color: #FFF;
+  --primary-color: #695CFE;
+  --toggle-color: #DDD;
+  --text-color: #707070;
+  --tran-02: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.4s ease;
+  --tran-05: all 0.5s ease;
+}
+
+html {
+  font-size: 90%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../images/banner.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Arial", sans-serif;
+}
+body .form_container {
+  width: 290px;
+  height: 450px;
+  padding: 0 1rem;
+  border-radius: 3px;
+  border: 1px solid rgb(234, 234, 234);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+  background: var(--primaryColor);
+  overflow: hidden;
+  z-index: 1;
+}
+body .overlay {
+  position: absolute;
+  background: var(--secondaryColor);
+  content: "";
+  height: 500px;
+  width: 500px;
+  border-radius: 50%;
+  z-index: 2;
+  top: -20%;
+}
+body .titileDiv {
+  position: inherit;
+  width: 100%;
+  margin: 10px auto 5px;
+  text-align: center;
+  transform: translateY(-3rem);
+  z-index: 1000;
+}
+body .titileDiv .logo {
+  width: 100px; /* Adjust width as needed */
+  height: auto; /* Maintains aspect ratio */
+  margin-bottom: 0.2rem; /* Adds space below the logo */
+  padding-top: 1rem;
+}
+body .titileDiv .title {
+  color: var(--blackColor);
+  font-weight: 700;
+  font-size: 2.5rem;
+  padding-top: 0.2rem;
+}
+body .rows {
+  display: grid;
+  position: relative;
+  gap: 1rem;
+  z-index: 1000;
+  transform: translateY(-1rem);
+  padding-bottom: 1rem;
+}
+body .rows label {
+  display: block;
+  padding-bottom: 0.285rem;
+  font-size: 13px;
+}
+body .rows input {
+  width: 100%;
+  background: var(--inputColor);
+  border: none;
+  outline: none;
+  color: var(--blackColor);
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 3px;
+}
+body .rows ::-moz-placeholder {
+  font-size: 10px;
+}
+body .rows ::placeholder {
+  font-size: 10px;
+}
+body .rows #submitBtn {
+  background: var(--blackColor);
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+body .rows #submitBtn:hover {
+  background: rgb(203, 203, 235);
+  color: var(--blackColor);
+}
+body .rows .registerLink {
+  display: block;
+  font-size: 13px;
+  color: var(--blackColor);
+  text-align: center;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+body .rows .registerLink a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.success .addedAccount {
+  text-align: center;
+  padding: 10px 20px;
+  background: var(--successColor);
+  color: var(--blackColor);
+  margin-bottom: 1rem;
+}
+
+.addedAccount {
+  margin: 0;
+  transform: translateY(100px);
+}
+
+.fail {
+  position: relative;
+  z-index: 1000;
+  color: var(--failureColor);
+  top: -7%;
+}/*# sourceMappingURL=main.css.map */
