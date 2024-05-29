@@ -23,6 +23,7 @@ $total_expense = $conn->query("SELECT SUM(amount) AS total FROM expenses")->fetc
   <title>Uto-Farm Finance</title>
   <link rel="stylesheet" href="assets/css/dashstyle.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -60,7 +61,31 @@ $total_expense = $conn->query("SELECT SUM(amount) AS total FROM expenses")->fetc
         </ul>
       </div>
       <div class="chart-placeholder">
-        <h3>Charts will be displayed here</h3>
+
+        <canvas id="myPieChart" width="400" height="400"></canvas>
+
+        <script>
+          // Fetch the data from data.php
+          fetch('data.php')
+            .then(response => response.json())
+            .then(data => {
+              var ctx = document.getElementById('myPieChart').getContext('2d');
+              var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                  labels: ['Income', 'Expenses'],
+                  datasets: [{
+                    data: [data.totalIncome, data.totalExpenses],
+                    backgroundColor: ['#4CAF50', '#F44336'],
+                  }]
+                },
+                options: {
+                  responsive: true
+                }
+              });
+            });
+        </script>
+
       </div>
     </div>
   </section>
