@@ -1,3 +1,19 @@
+<?php
+include ('config.php');
+
+// Fetch latest 3 incomes
+$latest_incomes = $conn->query("SELECT * FROM incomes ORDER BY date DESC LIMIT 3");
+
+// Fetch latest 3 expenses
+$latest_expenses = $conn->query("SELECT * FROM expenses ORDER BY date DESC LIMIT 3");
+
+// Calculate total income
+$total_income = $conn->query("SELECT SUM(amount) AS total FROM incomes")->fetch_assoc()['total'];
+
+// Calculate total expense
+$total_expense = $conn->query("SELECT SUM(amount) AS total FROM expenses")->fetch_assoc()['total'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,115 +21,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Uto-Farm Finance</title>
-
-  <!-- link css to the project -->
-  <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- Boxicons css -->
+  <link rel="stylesheet" href="assets/css/dashstyle.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 </head>
 
 <body>
-  <nav class="sidebar close">
-    <header>
-      <div class="image-text">
-        <span class="image">
-          <img src="assets/images/logo-small.png" alt="logo">
-        </span>
-
-        <div class="text header-text">
-          <span class="name">Uto-Farm </span>
-          <span class="proffession">Finance</span>
-        </div>
-      </div>
-
-      <i class='bx bx-chevron-right toggle'></i>
-    </header>
-
-    <div class="menu-bar">
-      <div class="menu">
-        <li class="search-box">
-          <i class='bx bx-search-alt icon'></i>
-          <input type="text" placeholder="Search...">
-        </li>
-        <ul class="menu-links">
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bxs-dashboard icon'></i>
-              <span class="text nav-text">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-money icon'></i>
-              <span class="text nav-text">Incomes</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bx-trending-down icon'></i>
-              <span class="text nav-text">Expenses</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bxs-user-check icon'></i>
-              <span class="text nav-text">Employee</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bxs-truck icon'></i>
-              <span class="text nav-text">Inventory</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bxs-calendar icon'></i>
-              <span class="text nav-text">Calendar</span>
-            </a>
-          </li>
-          <li class="nav-link">
-            <a href="#">
-              <i class='bx bxs-report icon'></i>
-              <span class="text nav-text">Reports</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="bottom-content">
-        <li class="">
-          <a href="#">
-            <i class='bx bx-log-out icon'></i>
-            <span class="text nav-text">Logout</span>
-          </a>
-        </li>
-
-        <li class="mode">
-          <div class="moon-sun">
-            <i class='bx bx-moon icon moon'></i>
-            <i class='bx bx-sun icon sun'></i>
-          </div>
-          <span class="mode-text text">Dark Mode</span>
-
-          <div class="toggle-switch">
-            <span class="switch"></span>
-          </div>
-        </li>
-      </div>
-    </div>
-  </nav>
+  <?php include 'sidebar.php'; ?>
 
   <section class="home">
-    <div class="text">Dashboard</div>
+    <div class="dashboard-header">
+      <div class="total-box">
+        <h2>Total Income: <span id="totalIncome"><?php echo $total_income; ?></span></h2>
+      </div>
+      <div class="total-box">
+        <h2>Total Expense: <span id="totalExpenses"><?php echo $total_expense; ?></span></h2>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <div class="latest-box">
+        <h3>Latest Incomes</h3>
+        <ul>
+          <?php while ($income = $latest_incomes->fetch_assoc()): ?>
+            <li>
+              <?php echo $income['name'] . ' - ' . $income['amount'] . ' - ' . $income['category'] . ' - ' . $income['date']; ?>
+            </li>
+          <?php endwhile; ?>
+        </ul>
+      </div>
+      <div class="latest-box">
+        <h3>Latest Expenses</h3>
+        <ul>
+          <?php while ($expense = $latest_expenses->fetch_assoc()): ?>
+            <li>
+              <?php echo $expense['name'] . ' - ' . $expense['amount'] . ' - ' . $expense['category'] . ' - ' . $expense['date']; ?>
+            </li>
+          <?php endwhile; ?>
+        </ul>
+      </div>
+      <div class="chart-placeholder">
+        <h3>Charts will be displayed here</h3>
+      </div>
+    </div>
   </section>
 
-
-  <script src="assets/js/script.js">
-
-  </script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>
