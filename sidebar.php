@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="add_employee.php">
+                    <a href="employee_manager.php">
                         <i class='bx bxs-user-check icon'></i>
                         <span class="text nav-text">Employee</span>
                     </a>
